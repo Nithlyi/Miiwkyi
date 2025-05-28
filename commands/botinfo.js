@@ -40,11 +40,11 @@ module.exports = {
           inline: true,
         },
         {
-          name: "Servidores",
+          name: "👥 Servidores",
           value: `${interaction.client.guilds.cache.size}`,
           inline: true,
         },
-        { name: "Desenvolvedor", value: "lonelyyi.", inline: true },
+        { name: "👨‍💻 Desenvolvedor", value: "lonelyyi.", inline: true },
         { name: "📚 Biblioteca", value: "discord.js v14", inline: true },
       )
       .setTimestamp()
