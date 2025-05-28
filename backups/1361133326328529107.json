@@ -1,0 +1,1567 @@
+{
+  "guildId": "1361133326328529107",
+  "name": "Gʜᴏsᴛs Gᴀʀᴅᴇɴ",
+  "channels": [
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪parcerias",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 3,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪akinator",
+      "type": 0,
+      "parentId": "1362200769536987407",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "moderator-only",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "Bate-papo²",
+      "type": 2,
+      "parentId": "1361134292650164315",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪tiktok",
+      "type": 0,
+      "parentId": "1361137341221179502",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "privado duo",
+      "type": 2,
+      "parentId": "1361134389383401533",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "bump",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 3,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "302050872383242240",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪cores",
+      "type": 0,
+      "parentId": "1361134210504458393",
+      "position": 3,
+      "permissionOverwrites": [
+        {
+          "id": "1332644814344425593",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "commands",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪bot-commands",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 5,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 7,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "chat",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 6,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "Lofi 24/7",
+      "type": 13,
+      "parentId": "1361404165678563412",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 4,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪slc-parcerias",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪anunciamentos",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 5,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪artes",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 4,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪desabafos",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 3,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "Música²",
+      "type": 2,
+      "parentId": "1361404165678563412",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "privado quarteto",
+      "type": 2,
+      "parentId": "1361134389383401533",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 9,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪introdução",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪chat",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪regras",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 4,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪mudae",
+      "type": 0,
+      "parentId": "1362200769536987407",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "Música¹",
+      "type": 2,
+      "parentId": "1361404165678563412",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪registro",
+      "type": 0,
+      "parentId": "1361134210504458393",
+      "position": 2,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪apresente-se",
+      "type": 0,
+      "parentId": "1361134210504458393",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "Bate-papo¹",
+      "type": 2,
+      "parentId": "1361134292650164315",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "logs",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 4,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 3,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪midia",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪pets",
+      "type": 0,
+      "parentId": "1361133326890565790",
+      "position": 5,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪verificação",
+      "type": 0,
+      "parentId": "1361134210504458393",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "235148962103951360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "privado trio",
+      "type": 2,
+      "parentId": "1361134389383401533",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "solicitações",
+      "type": 0,
+      "parentId": "1361134469519511793",
+      "position": 5,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 8,
+      "permissionOverwrites": [
+        {
+          "id": "1361135095708127322",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135058395594823",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135113722925193",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361135036954574848",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361138010506264586",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪instagram",
+      "type": 0,
+      "parentId": "1361137341221179502",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪face-reveal",
+      "type": 0,
+      "parentId": "1361137341221179502",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪gartic",
+      "type": 0,
+      "parentId": "1362200769536987407",
+      "position": 1,
+      "permissionOverwrites": [
+        {
+          "id": "487328045275938828",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "pedir-música",
+      "type": 0,
+      "parentId": "1361404165678563412",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪sem-mic",
+      "type": 0,
+      "parentId": "1361134292650164315",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "· · ──── ·♰· ──── · ·",
+      "type": 4,
+      "parentId": null,
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    },
+    {
+      "name": "ׄ꒰🦇꒱˖-࣪welcome",
+      "type": 0,
+      "parentId": "1361133326890565784",
+      "position": 0,
+      "permissionOverwrites": [
+        {
+          "id": "1361133326328529107",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "155149108183695360",
+          "type": 1,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        },
+        {
+          "id": "1361137976226091208",
+          "type": 0,
+          "allow": "[object Object]",
+          "deny": "[object Object]"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "name": "GarticMod",
+      "color": 0,
+      "hoist": false,
+      "position": 3,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "preto",
+      "color": 0,
+      "hoist": false,
+      "position": 12,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "roxo",
+      "color": 10181046,
+      "hoist": false,
+      "position": 7,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "marrom",
+      "color": 4465920,
+      "hoist": false,
+      "position": 6,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "FlaviBot",
+      "color": 0,
+      "hoist": false,
+      "position": 17,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 2,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "GarticBOT",
+      "color": 0,
+      "hoist": false,
+      "position": 26,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "carl-bot",
+      "color": 0,
+      "hoist": false,
+      "position": 22,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Loritta",
+      "color": 0,
+      "hoist": false,
+      "position": 41,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Bot's",
+      "color": 0,
+      "hoist": true,
+      "position": 39,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Recepcionista",
+      "color": 49879,
+      "hoist": true,
+      "position": 44,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 13,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Moderador",
+      "color": 15665,
+      "hoist": true,
+      "position": 45,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 42,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Any pronoun",
+      "color": 0,
+      "hoist": false,
+      "position": 28,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Dyno",
+      "color": 0,
+      "hoist": false,
+      "position": 23,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Wick",
+      "color": 0,
+      "hoist": false,
+      "position": 20,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "+18",
+      "color": 0,
+      "hoist": false,
+      "position": 35,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "vermelho",
+      "color": 13697024,
+      "hoist": false,
+      "position": 8,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "rosa",
+      "color": 15277667,
+      "hoist": false,
+      "position": 11,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Girl",
+      "color": 0,
+      "hoist": false,
+      "position": 32,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "SlashBot",
+      "color": 0,
+      "hoist": false,
+      "position": 1,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Miyw",
+      "color": 0,
+      "hoist": false,
+      "position": 43,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "No binari",
+      "color": 0,
+      "hoist": false,
+      "position": 31,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Senior Administrador",
+      "color": 4325376,
+      "hoist": true,
+      "position": 46,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "-18",
+      "color": 0,
+      "hoist": false,
+      "position": 34,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 27,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Akinator",
+      "color": 0,
+      "hoist": false,
+      "position": 18,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "She/he",
+      "color": 0,
+      "hoist": false,
+      "position": 29,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "amarelo",
+      "color": 16774912,
+      "hoist": false,
+      "position": 4,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Giveaway Boat",
+      "color": 0,
+      "hoist": false,
+      "position": 15,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Mudae",
+      "color": 0,
+      "hoist": false,
+      "position": 19,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "laranja",
+      "color": 13992192,
+      "hoist": false,
+      "position": 9,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Donos",
+      "color": 2164007,
+      "hoist": true,
+      "position": 47,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Server Booster",
+      "color": 16023551,
+      "hoist": false,
+      "position": 37,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "DISBOARD.org",
+      "color": 0,
+      "hoist": false,
+      "position": 21,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Appy",
+      "color": 0,
+      "hoist": false,
+      "position": 14,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Músic bot's",
+      "color": 0,
+      "hoist": true,
+      "position": 40,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Souls",
+      "color": 0,
+      "hoist": true,
+      "position": 38,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 36,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "He/him",
+      "color": 0,
+      "hoist": false,
+      "position": 30,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Lara✨",
+      "color": 0,
+      "hoist": false,
+      "position": 16,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "━━━━━━━━━━━━━━━━",
+      "color": 0,
+      "hoist": false,
+      "position": 25,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "azul",
+      "color": 1534624,
+      "hoist": false,
+      "position": 10,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "branco",
+      "color": 16777215,
+      "hoist": false,
+      "position": 5,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Lofi Radio",
+      "color": 0,
+      "hoist": false,
+      "position": 24,
+      "permissions": "[object Object]",
+      "mentionable": false
+    },
+    {
+      "name": "Boy",
+      "color": 0,
+      "hoist": false,
+      "position": 33,
+      "permissions": "[object Object]",
+      "mentionable": false
+    }
+  ],
+  "timestamp": "2025-05-28T04:15:15.981Z"
+}

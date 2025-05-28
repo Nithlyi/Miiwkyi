@@ -1,0 +1,9 @@
+{
+  "antiRaid": false,
+  "antiInvite": false,
+  "antiSpam": false,
+  "antiLink": false,
+  "manutencao": false,
+  "logChannelId": "1347635652749037684",
+  "minAccountAgeDays": 5
+}
