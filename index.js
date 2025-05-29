@@ -10,6 +10,10 @@ const {
   PermissionsBitField,
   REST,
   Routes,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
 } = require("discord.js");
 
 const clientId = "1376616183276765274";
@@ -266,6 +270,63 @@ client.on("interactionCreate", async (interaction) => {
       await interaction.reply({
         content: `🧓 Idade mínima definida para **${dias} dias**.`,
         ephemeral: true,
+      });
+    }
+
+    // Aqui entra o modal do /criarembed
+    if (interaction.customId === "modal_criarembed") {
+      const titulo = interaction.fields.getTextInputValue("embed_titulo");
+      const descricao = interaction.fields.getTextInputValue("embed_descricao");
+      const cor = interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
+
+      // Monta o embed preview
+      const embedPreview = new EmbedBuilder()
+        .setTitle(titulo)
+        .setDescription(descricao)
+        .setColor(parseInt(cor.replace("#", ""), 16) || 0x0099ff)
+        .setFooter({ text: "Confirme ou cancele" });
+
+      // Botões Confirmar e Cancelar
+      const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("embed_confirmar")
+          .setLabel("Confirmar")
+          .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+          .setCustomId("embed_cancelar")
+          .setLabel("Cancelar")
+          .setStyle(ButtonStyle.Danger),
+      );
+
+      await interaction.reply({
+        embeds: [embedPreview],
+        components: [row],
+        ephemeral: true,
+      });
+    }
+  }
+
+  if (interaction.isButton()) {
+    if (interaction.customId === "embed_confirmar") {
+      const embed = interaction.message.embeds[0];
+      if (!embed) {
+        return interaction.reply({
+          content: "❌ Não achei o embed para enviar.",
+          ephemeral: true,
+        });
+      }
+
+      await interaction.channel.send({ embeds: [embed] });
+      await interaction.update({
+        content: "✅ Embed enviado!",
+        components: [],
+        embeds: [],
+      });
+    } else if (interaction.customId === "embed_cancelar") {
+      await interaction.update({
+        content: "❌ Criação de embed cancelada.",
+        components: [],
+        embeds: [],
       });
     }
   }
