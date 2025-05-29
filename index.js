@@ -25,6 +25,7 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions, // importante para reaction roles
   ],
 });
 
@@ -277,7 +278,8 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.customId === "modal_criarembed") {
       const titulo = interaction.fields.getTextInputValue("embed_titulo");
       const descricao = interaction.fields.getTextInputValue("embed_descricao");
-      const cor = interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
+      const cor =
+        interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
 
       // Monta o embed preview
       const embedPreview = new EmbedBuilder()
@@ -329,6 +331,67 @@ client.on("interactionCreate", async (interaction) => {
         embeds: [],
       });
     }
+  }
+});
+
+// ====== Reaction Role Listeners =======
+const reactionRolesFile = "./reactionroles.json";
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  if (user.bot) return;
+  if (reaction.partial) await reaction.fetch();
+
+  if (!reaction.message.guild) return;
+
+  if (!fs.existsSync(reactionRolesFile)) return;
+  const data = JSON.parse(fs.readFileSync(reactionRolesFile, "utf8"));
+
+  const rr = data.find(
+    (r) =>
+      r.guildId === reaction.message.guild.id &&
+      r.channelId === reaction.message.channel.id &&
+      r.messageId === reaction.message.id &&
+      (r.emoji === reaction.emoji.name || r.emoji === reaction.emoji.toString()),
+  );
+
+  if (!rr) return;
+
+  const member = await reaction.message.guild.members.fetch(user.id);
+  if (!member) return;
+
+  try {
+    await member.roles.add(rr.roleId);
+  } catch (error) {
+    console.error("Erro ao adicionar cargo:", error);
+  }
+});
+
+client.on("messageReactionRemove", async (reaction, user) => {
+  if (user.bot) return;
+  if (reaction.partial) await reaction.fetch();
+
+  if (!reaction.message.guild) return;
+
+  if (!fs.existsSync(reactionRolesFile)) return;
+  const data = JSON.parse(fs.readFileSync(reactionRolesFile, "utf8"));
+
+  const rr = data.find(
+    (r) =>
+      r.guildId === reaction.message.guild.id &&
+      r.channelId === reaction.message.channel.id &&
+      r.messageId === reaction.message.id &&
+      (r.emoji === reaction.emoji.name || r.emoji === reaction.emoji.toString()),
+  );
+
+  if (!rr) return;
+
+  const member = await reaction.message.guild.members.fetch(user.id);
+  if (!member) return;
+
+  try {
+    await member.roles.remove(rr.roleId);
+  } catch (error) {
+    console.error("Erro ao remover cargo:", error);
   }
 });
 
