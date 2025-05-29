@@ -49,7 +49,7 @@ module.exports = {
     let message;
     try {
       message = await channel.messages.fetch(messageId);
-    } catch {
+    } catch (err) {
       return interaction.reply({
         content: "Não encontrei a mensagem com esse ID nesse canal.",
         ephemeral: true,
@@ -58,7 +58,7 @@ module.exports = {
 
     try {
       await message.react(emoji);
-    } catch {
+    } catch (err) {
       return interaction.reply({
         content:
           "Não consegui reagir com esse emoji. Use um emoji válido (unicode ou custom).",
@@ -70,24 +70,34 @@ module.exports = {
     let reactionRoles = [];
     try {
       if (fs.existsSync(filePath)) {
-        reactionRoles = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        const data = fs.readFileSync(filePath, "utf8");
+        reactionRoles = JSON.parse(data);
       }
     } catch {
       reactionRoles = [];
     }
 
+    // Adiciona nova reaction role
     reactionRoles.push({
       guildId: guild.id,
       channelId: channel.id,
       messageId: message.id,
+      emoji,
       roleId: role.id,
-      emoji: emoji,
     });
 
-    fs.writeFileSync(filePath, JSON.stringify(reactionRoles, null, 2));
+    // Salva no arquivo
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(reactionRoles, null, 2), "utf8");
+    } catch (err) {
+      return interaction.reply({
+        content: "Erro ao salvar as configurações de reaction role.",
+        ephemeral: true,
+      });
+    }
 
     await interaction.reply({
-      content: `✅ Reaction role configurada!\nMensagem: ${message.id}\nCargo: ${role.name}\nEmoji: ${emoji}`,
+      content: `✅ Reaction role configurada! Usuários que reagirem com ${emoji} na mensagem <https://discord.com/channels/${guild.id}/${channel.id}/${message.id}> receberão o cargo **${role.name}**.`,
       ephemeral: true,
     });
   },
