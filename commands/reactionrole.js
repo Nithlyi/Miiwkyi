@@ -1,85 +1,93 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reactionrole")
-    .setDescription("Cria uma mensagem para reaction roles")
-    .addRoleOption((opt) =>
-      opt.setName("role").setDescription("Cargo a ser dado").setRequired(true),
+    .setDescription("Configura uma reaction role numa mensagem existente")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
+    .addChannelOption((option) =>
+      option
+        .setName("canal")
+        .setDescription("Canal da mensagem")
+        .setRequired(true)
     )
-    .addStringOption((opt) =>
-      opt
+    .addStringOption((option) =>
+      option
+        .setName("mensagemid")
+        .setDescription("ID da mensagem onde será adicionada a reaction")
+        .setRequired(true)
+    )
+    .addRoleOption((option) =>
+      option
+        .setName("cargo")
+        .setDescription("Cargo que será dado/removido")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
         .setName("emoji")
-        .setDescription("Emoji para reagir")
-        .setRequired(true),
-    )
-    .addChannelOption((opt) =>
-      opt
-        .setName("channel")
-        .setDescription("Canal para enviar a mensagem")
-        .setRequired(true),
-    )
-    .addStringOption((opt) =>
-      opt
-        .setName("mensagem")
-        .setDescription("Texto da mensagem que será enviada")
-        .setRequired(false),
+        .setDescription("Emoji para a reaction (unicode ou emoji custom)")
+        .setRequired(true)
     ),
 
   async execute(interaction) {
-    const role = interaction.options.getRole("role");
+    const channel = interaction.options.getChannel("canal");
+    const messageId = interaction.options.getString("mensagemid");
+    const role = interaction.options.getRole("cargo");
     const emoji = interaction.options.getString("emoji");
-    const channel = interaction.options.getChannel("channel");
-    const text =
-      interaction.options.getString("mensagem") ||
-      `Reaja para receber o cargo ${role.name}`;
+    const guild = interaction.guild;
 
-    if (!channel.isTextBased()) {
+    if (!channel || channel.guild.id !== guild.id || channel.type !== 0) {
       return interaction.reply({
-        content: "❌ O canal precisa ser um canal de texto.",
+        content: "Canal inválido ou não é um canal de texto.",
         ephemeral: true,
       });
     }
 
-    // Envia embed com a mensagem
-    const embed = new EmbedBuilder()
-      .setTitle("Reaction Role")
-      .setDescription(text)
-      .setColor("Blue")
-      .setFooter({
-        text: `Reaja com ${emoji} para receber o cargo ${role.name}`,
-      });
-
-    const msg = await channel.send({ embeds: [embed] });
+    let message;
     try {
-      await msg.react(emoji);
+      message = await channel.messages.fetch(messageId);
     } catch {
       return interaction.reply({
-        content: "❌ Emoji inválido ou não encontrado para reagir.",
+        content: "Não encontrei a mensagem com esse ID nesse canal.",
         ephemeral: true,
       });
     }
 
-    // Salva os dados num arquivo reactionroles.json para controle
-    const filePath = "./reactionroles.json";
-    let data = [];
-    if (fs.existsSync(filePath)) {
-      data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    try {
+      await message.react(emoji);
+    } catch {
+      return interaction.reply({
+        content:
+          "Não consegui reagir com esse emoji. Use um emoji válido (unicode ou custom).",
+        ephemeral: true,
+      });
     }
 
-    data.push({
-      guildId: interaction.guild.id,
+    const filePath = path.join(__dirname, "..", "reactionroles.json");
+    let reactionRoles = [];
+    try {
+      if (fs.existsSync(filePath)) {
+        reactionRoles = JSON.parse(fs.readFileSync(filePath, "utf8"));
+      }
+    } catch {
+      reactionRoles = [];
+    }
+
+    reactionRoles.push({
+      guildId: guild.id,
       channelId: channel.id,
-      messageId: msg.id,
+      messageId: message.id,
       roleId: role.id,
       emoji: emoji,
     });
 
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(reactionRoles, null, 2));
 
     await interaction.reply({
-      content: `✅ Reaction role criada com sucesso em ${channel}`,
+      content: `✅ Reaction role configurada!\nMensagem: ${message.id}\nCargo: ${role.name}\nEmoji: ${emoji}`,
       ephemeral: true,
     });
   },
