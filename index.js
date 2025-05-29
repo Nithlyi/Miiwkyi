@@ -25,13 +25,14 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessageReactions, // importante para reaction roles
+    GatewayIntentBits.GuildMessageReactions, // necessário para reaction role
   ],
 });
 
 client.commands = new Collection();
 const commands = [];
 
+// Carregar comandos da pasta /commands
 fs.readdirSync(path.join(__dirname, "commands"))
   .filter((file) => file.endsWith(".js"))
   .forEach((file) => {
@@ -42,6 +43,7 @@ fs.readdirSync(path.join(__dirname, "commands"))
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
+// Registrar comandos no Discord Guild
 (async () => {
   try {
     console.log("📦 Registrando comandos...");
@@ -54,6 +56,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
   }
 })();
 
+// Função para salvar configurações
 function updateConfig(newConfig) {
   fs.writeFileSync("./config.json", JSON.stringify(newConfig, null, 2));
 }
@@ -62,31 +65,28 @@ client.once("ready", () => {
   console.log(`✅ Bot iniciado como ${client.user.tag}`);
 });
 
-// Proteções
+// Mapas e Sets para controle de anti-spam
 const userMessageCache = new Map();
 const spamWarnCooldown = new Set();
 
+// Evento anti-raid (kick contas novas)
 client.on("guildMemberAdd", async (member) => {
   const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
   if (!config.antiRaid || config.manutencao) return;
 
   const minAgeDays = config.minAccountAgeDays || 5;
-  const accountAge =
-    (Date.now() - member.user.createdAt) / (1000 * 60 * 60 * 24);
+  const accountAge = (Date.now() - member.user.createdAt) / (1000 * 60 * 60 * 24);
 
   if (accountAge < minAgeDays) {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
-    await member.kick(
-      `Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`,
-    );
+    await member.kick(`Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`);
     if (logChannel) {
-      logChannel.send(
-        `🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`,
-      );
+      logChannel.send(`🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`);
     }
   }
 });
 
+// Evento de mensagem para anti-invite, anti-link, anti-spam
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
@@ -148,6 +148,7 @@ client.on("messageCreate", async (message) => {
   }
 });
 
+// Comandos e interações (slash commands, select menus, modais, botões)
 client.on("interactionCreate", async (interaction) => {
   const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
 
@@ -274,21 +275,17 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
 
-    // Aqui entra o modal do /criarembed
     if (interaction.customId === "modal_criarembed") {
       const titulo = interaction.fields.getTextInputValue("embed_titulo");
       const descricao = interaction.fields.getTextInputValue("embed_descricao");
-      const cor =
-        interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
+      const cor = interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
 
-      // Monta o embed preview
       const embedPreview = new EmbedBuilder()
         .setTitle(titulo)
         .setDescription(descricao)
         .setColor(parseInt(cor.replace("#", ""), 16) || 0x0099ff)
         .setFooter({ text: "Confirme ou cancele" });
 
-      // Botões Confirmar e Cancelar
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("embed_confirmar")
@@ -334,13 +331,13 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-// ====== Reaction Role Listeners =======
+// ====== Reaction Role =======
 const reactionRolesFile = "./reactionroles.json";
 
+// Quando adiciona reaction, adiciona cargo
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) await reaction.fetch();
-
   if (!reaction.message.guild) return;
 
   if (!fs.existsSync(reactionRolesFile)) return;
@@ -366,10 +363,10 @@ client.on("messageReactionAdd", async (reaction, user) => {
   }
 });
 
+// Quando remove reaction, remove cargo
 client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) await reaction.fetch();
-
   if (!reaction.message.guild) return;
 
   if (!fs.existsSync(reactionRolesFile)) return;
