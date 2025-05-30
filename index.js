@@ -10,9 +10,6 @@ const {
   PermissionsBitField,
 } = require("discord.js");
 
-const clientId = "1376616183276765274";
-const guildId = "1361133326328529107";
-
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -21,11 +18,10 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessageReactions,
   ],
-  partials: ["MESSAGE", "CHANNEL", "REACTION"], // <- ESSENCIAL para reaction roles
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 
 client.commands = new Collection();
-const commands = [];
 
 // Carregar comandos da pasta ./commands
 fs.readdirSync(path.join(__dirname, "commands"))
@@ -33,24 +29,7 @@ fs.readdirSync(path.join(__dirname, "commands"))
   .forEach((file) => {
     const command = require(`./commands/${file}`);
     client.commands.set(command.data.name, command);
-    commands.push(command.data.toJSON());
   });
-
-// Registrar comandos (guild commands)
-const { REST, Routes } = require("discord.js");
-const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
-
-(async () => {
-  try {
-    console.log("📦 Registrando comandos...");
-    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-      body: commands,
-    });
-    console.log("✅ Comandos registrados com sucesso.");
-  } catch (error) {
-    console.error("❌ Erro ao registrar comandos:", error);
-  }
-})();
 
 // Configurações do bot
 let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
@@ -80,7 +59,7 @@ client.once("ready", () => {
   console.log(`✅ Bot iniciado como ${client.user.tag}`);
 });
 
-// Proteções - Anti-raid na entrada
+// Proteções - Anti-raid
 client.on("guildMemberAdd", async (member) => {
   if (!config.antiRaid || config.manutencao) return;
 
@@ -98,7 +77,7 @@ client.on("guildMemberAdd", async (member) => {
   }
 });
 
-// Anti-invite, anti-link, anti-spam no envio de mensagens
+// Proteções - Anti-invite, anti-link, anti-spam
 const userMessageCache = new Map();
 const spamWarnCooldown = new Set();
 
@@ -150,7 +129,7 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-// Reaction Role - add role
+// Reaction Role - adicionar cargo
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) {
@@ -182,7 +161,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   }
 });
 
-// Reaction Role - remove role
+// Reaction Role - remover cargo
 client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) {
@@ -214,7 +193,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
   }
 });
 
-// Interações - comandos slash
+// Interações com comandos slash
 client.on("interactionCreate", async (interaction) => {
   try {
     if (interaction.isChatInputCommand()) {
