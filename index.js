@@ -161,10 +161,12 @@ client.on("messageReactionAdd", async (reaction, user) => {
     }
   }
 
+  const reactedEmoji = reaction.emoji.id
+    ? `<${reaction.emoji.animated ? "a" : ""}:${reaction.emoji.name}:${reaction.emoji.id}>`
+    : reaction.emoji.name;
+
   const rr = reactionRoles.find(
-    (r) =>
-      r.messageId === reaction.message.id &&
-      r.emoji === (reaction.emoji.id || reaction.emoji.name)
+    (r) => r.messageId === reaction.message.id && r.emoji === reactedEmoji
   );
 
   if (!rr) return;
@@ -189,10 +191,12 @@ client.on("messageReactionRemove", async (reaction, user) => {
     }
   }
 
+  const reactedEmoji = reaction.emoji.id
+    ? `<${reaction.emoji.animated ? "a" : ""}:${reaction.emoji.name}:${reaction.emoji.id}>`
+    : reaction.emoji.name;
+
   const rr = reactionRoles.find(
-    (r) =>
-      r.messageId === reaction.message.id &&
-      r.emoji === (reaction.emoji.id || reaction.emoji.name)
+    (r) => r.messageId === reaction.message.id && r.emoji === reactedEmoji
   );
 
   if (!rr) return;
