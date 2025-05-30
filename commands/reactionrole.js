@@ -25,29 +25,36 @@ function isValidEmoji(emoji) {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reactionrole")
-    .setDescription("Cria uma mensagem de reaction role.")
+    .setDescription("Cria ou configura uma mensagem de reaction role.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
-    .addStringOption((opt) =>
+    .addStringOption(opt =>
       opt
         .setName("mensagem")
-        .setDescription("Texto da mensagem")
-        .setRequired(true),
+        .setDescription("Texto da mensagem (deixe vazio se usar mensagem existente)")
+        .setRequired(false)
     )
-    .addRoleOption((opt) =>
+    .addStringOption(opt =>
+      opt
+        .setName("message_id")
+        .setDescription("ID da mensagem existente para configurar")
+        .setRequired(false)
+    )
+    .addRoleOption(opt =>
       opt
         .setName("cargo")
         .setDescription("Cargo a ser atribuído")
-        .setRequired(true),
+        .setRequired(true)
     )
-    .addStringOption((opt) =>
+    .addStringOption(opt =>
       opt
         .setName("emoji")
         .setDescription("Emoji para o cargo")
-        .setRequired(true),
+        .setRequired(true)
     ),
 
   async execute(interaction) {
     const msg = interaction.options.getString("mensagem");
+    const messageId = interaction.options.getString("message_id");
     const role = interaction.options.getRole("cargo");
     const emoji = interaction.options.getString("emoji");
 
@@ -58,35 +65,56 @@ module.exports = {
       });
     }
 
+    if (!msg && !messageId) {
+      return interaction.reply({
+        content: "❌ Você precisa fornecer uma mensagem ou o ID de uma mensagem existente.",
+        ephemeral: true,
+      });
+    }
+
     await interaction.deferReply({ ephemeral: true });
 
+    let targetMessage;
     try {
-      const sentMessage = await interaction.channel.send({ content: msg });
+      if (messageId) {
+        // Tentar pegar mensagem existente no canal atual pelo ID
+        targetMessage = await interaction.channel.messages.fetch(messageId);
+        if (!targetMessage) {
+          return interaction.editReply({
+            content: "❌ Mensagem com esse ID não encontrada neste canal.",
+          });
+        }
+      } else {
+        // Criar nova mensagem com o texto informado
+        targetMessage = await interaction.channel.send({ content: msg });
+      }
 
-      // Adiciona reação
+      // Tentar adicionar reação
       try {
-        await sentMessage.react(emoji);
-      } catch {
+        await targetMessage.react(emoji);
+      } catch (err) {
+        console.error(err);
         return interaction.editReply({
           content:
             "❌ Falha ao adicionar o emoji. Verifique se o emoji é válido e se o bot tem acesso a ele.",
         });
       }
 
+      // Salvar a reaction role na lista e arquivo
       reactionRoles.push({
-        messageId: sentMessage.id,
+        messageId: targetMessage.id,
         emoji: emoji,
         roleId: role.id,
       });
       saveReactionRoles();
 
       await interaction.editReply({
-        content: "✅ Reaction Role criado com sucesso.",
+        content: `✅ Reaction Role configurado com sucesso na mensagem ${targetMessage.id}.`,
       });
     } catch (error) {
       console.error(error);
       await interaction.editReply({
-        content: "❌ Erro ao enviar a mensagem de reaction role.",
+        content: "❌ Erro ao enviar/configurar a mensagem de reaction role.",
       });
     }
   },
