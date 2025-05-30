@@ -14,11 +14,8 @@ function saveReactionRoles() {
 loadReactionRoles();
 
 function isValidEmoji(emoji) {
-  // Regex simples para emojis Unicode
   const regexUnicode = /\p{Extended_Pictographic}/u;
-  // Regex para emoji custom do Discord <a:name:id> ou <:name:id>
   const regexCustom = /^<a?:\w+:\d+>$/;
-
   return regexUnicode.test(emoji) || regexCustom.test(emoji);
 }
 
@@ -27,18 +24,6 @@ module.exports = {
     .setName("reactionrole")
     .setDescription("Cria ou configura uma mensagem de reaction role.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
-    .addStringOption(opt =>
-      opt
-        .setName("mensagem")
-        .setDescription("Texto da mensagem (deixe vazio se usar mensagem existente)")
-        .setRequired(false)
-    )
-    .addStringOption(opt =>
-      opt
-        .setName("message_id")
-        .setDescription("ID da mensagem existente para configurar")
-        .setRequired(false)
-    )
     .addRoleOption(opt =>
       opt
         .setName("cargo")
@@ -50,6 +35,18 @@ module.exports = {
         .setName("emoji")
         .setDescription("Emoji para o cargo")
         .setRequired(true)
+    )
+    .addStringOption(opt =>
+      opt
+        .setName("mensagem")
+        .setDescription("Texto da mensagem (deixe vazio se usar mensagem existente)")
+        .setRequired(false)
+    )
+    .addStringOption(opt =>
+      opt
+        .setName("message_id")
+        .setDescription("ID da mensagem existente para configurar")
+        .setRequired(false)
     ),
 
   async execute(interaction) {
@@ -77,7 +74,6 @@ module.exports = {
     let targetMessage;
     try {
       if (messageId) {
-        // Tentar pegar mensagem existente no canal atual pelo ID
         targetMessage = await interaction.channel.messages.fetch(messageId);
         if (!targetMessage) {
           return interaction.editReply({
@@ -85,11 +81,9 @@ module.exports = {
           });
         }
       } else {
-        // Criar nova mensagem com o texto informado
         targetMessage = await interaction.channel.send({ content: msg });
       }
 
-      // Tentar adicionar reação
       try {
         await targetMessage.react(emoji);
       } catch (err) {
@@ -100,7 +94,6 @@ module.exports = {
         });
       }
 
-      // Salvar a reaction role na lista e arquivo
       reactionRoles.push({
         messageId: targetMessage.id,
         emoji: emoji,
