@@ -224,4 +224,5 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+console.log("Token carregado:", process.env.TOKEN ? "Sim" : "Não");
 client.login(process.env.TOKEN);
