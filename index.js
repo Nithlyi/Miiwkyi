@@ -21,6 +21,7 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessageReactions,
   ],
+  partials: ["MESSAGE", "CHANNEL", "REACTION"], // <- ESSENCIAL para reaction roles
 });
 
 client.commands = new Collection();
