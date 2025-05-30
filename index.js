@@ -8,12 +8,6 @@ const {
   Collection,
   GatewayIntentBits,
   PermissionsBitField,
-  REST,
-  Routes,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  EmbedBuilder,
 } = require("discord.js");
 
 const clientId = "1376616183276765274";
@@ -32,6 +26,7 @@ const client = new Client({
 client.commands = new Collection();
 const commands = [];
 
+// Carregar comandos da pasta ./commands
 fs.readdirSync(path.join(__dirname, "commands"))
   .filter((file) => file.endsWith(".js"))
   .forEach((file) => {
@@ -40,6 +35,8 @@ fs.readdirSync(path.join(__dirname, "commands"))
     commands.push(command.data.toJSON());
   });
 
+// Registrar comandos (guild commands)
+const { REST, Routes } = require("discord.js");
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
@@ -54,24 +51,26 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
   }
 })();
 
+// Configurações do bot
 let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-
 function updateConfig(newConfig) {
   config = newConfig;
   fs.writeFileSync("./config.json", JSON.stringify(newConfig, null, 2));
 }
 
+// Reaction Roles
 let reactionRoles = [];
 const rrPath = "./reactionroles.json";
 
 function loadReactionRoles() {
   if (fs.existsSync(rrPath)) {
     reactionRoles = JSON.parse(fs.readFileSync(rrPath, "utf8"));
+    console.log(`📥 Carregados ${reactionRoles.length} reaction roles.`);
   }
 }
-
 function saveReactionRoles() {
   fs.writeFileSync(rrPath, JSON.stringify(reactionRoles, null, 2));
+  console.log(`💾 Reaction roles salvos.`);
 }
 
 loadReactionRoles();
@@ -80,9 +79,7 @@ client.once("ready", () => {
   console.log(`✅ Bot iniciado como ${client.user.tag}`);
 });
 
-const userMessageCache = new Map();
-const spamWarnCooldown = new Set();
-
+// Proteções - Anti-raid na entrada
 client.on("guildMemberAdd", async (member) => {
   if (!config.antiRaid || config.manutencao) return;
 
@@ -93,10 +90,16 @@ client.on("guildMemberAdd", async (member) => {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
     await member.kick(`Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`);
     if (logChannel) {
-      logChannel.send(`🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`);
+      logChannel.send(
+        `🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`
+      );
     }
   }
 });
+
+// Anti-invite, anti-link, anti-spam no envio de mensagens
+const userMessageCache = new Map();
+const spamWarnCooldown = new Set();
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || config.manutencao) return;
@@ -105,6 +108,7 @@ client.on("messageCreate", async (message) => {
     const perms = message.member.permissions;
     const content = message.content;
 
+    // Anti-invite
     if (config.antiInvite && /discord(\.gg|app\.com\/invite|\.com\/invite)\//i.test(content)) {
       if (!perms.has(PermissionsBitField.Flags.ManageMessages)) {
         await message.delete().catch(() => {});
@@ -113,6 +117,7 @@ client.on("messageCreate", async (message) => {
       }
     }
 
+    // Anti-link
     if (config.antiLink && /https?:\/\/[^\s]+/gi.test(content)) {
       if (!perms.has(PermissionsBitField.Flags.ManageMessages)) {
         await message.delete().catch(() => {});
@@ -121,6 +126,7 @@ client.on("messageCreate", async (message) => {
       }
     }
 
+    // Anti-spam
     if (config.antiSpam) {
       const key = `${message.guild.id}_${message.channel.id}_${message.author.id}`;
       const prev = userMessageCache.get(key) || { content: "", count: 0 };
@@ -143,6 +149,7 @@ client.on("messageCreate", async (message) => {
   }
 });
 
+// Reaction Role - add role
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) {
@@ -155,7 +162,9 @@ client.on("messageReactionAdd", async (reaction, user) => {
   }
 
   const rr = reactionRoles.find(
-    (r) => r.messageId === reaction.message.id && r.emoji === (reaction.emoji.id || reaction.emoji.name)
+    (r) =>
+      r.messageId === reaction.message.id &&
+      r.emoji === (reaction.emoji.id || reaction.emoji.name)
   );
 
   if (!rr) return;
@@ -168,6 +177,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   }
 });
 
+// Reaction Role - remove role
 client.on("messageReactionRemove", async (reaction, user) => {
   if (user.bot) return;
   if (reaction.partial) {
@@ -180,7 +190,9 @@ client.on("messageReactionRemove", async (reaction, user) => {
   }
 
   const rr = reactionRoles.find(
-    (r) => r.messageId === reaction.message.id && r.emoji === (reaction.emoji.id || reaction.emoji.name)
+    (r) =>
+      r.messageId === reaction.message.id &&
+      r.emoji === (reaction.emoji.id || reaction.emoji.name)
   );
 
   if (!rr) return;
@@ -193,6 +205,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
   }
 });
 
+// Interações - comandos slash
 client.on("interactionCreate", async (interaction) => {
   try {
     if (interaction.isChatInputCommand()) {
@@ -200,9 +213,6 @@ client.on("interactionCreate", async (interaction) => {
       if (!command) return;
       await command.execute(interaction);
     }
-
-    // (demais blocos de interação seguem inalterados)
-    // ...
   } catch (error) {
     console.error("Erro na interação:", error);
     if (!interaction.replied && !interaction.deferred) {
