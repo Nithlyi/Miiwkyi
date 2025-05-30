@@ -89,11 +89,11 @@ client.on("guildMemberAdd", async (member) => {
 
   if (accountAge < minAgeDays) {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
-    await member.kick(`Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`);
+    await member.kick(`Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`).catch(() => {});
     if (logChannel) {
       logChannel.send(
         `🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`
-      );
+      ).catch(() => {});
     }
   }
 });
@@ -113,7 +113,7 @@ client.on("messageCreate", async (message) => {
     if (config.antiInvite && /discord(\.gg|app\.com\/invite|\.com\/invite)\//i.test(content)) {
       if (!perms.has(PermissionsBitField.Flags.ManageMessages)) {
         await message.delete().catch(() => {});
-        const aviso = await message.channel.send(`${message.author}, convites não são permitidos.`);
+        const aviso = await message.channel.send(`${message.author}, convites não são permitidos.`).catch(() => {});
         setTimeout(() => aviso.delete().catch(() => {}), 5000);
       }
     }
@@ -122,7 +122,7 @@ client.on("messageCreate", async (message) => {
     if (config.antiLink && /https?:\/\/[^\s]+/gi.test(content)) {
       if (!perms.has(PermissionsBitField.Flags.ManageMessages)) {
         await message.delete().catch(() => {});
-        const aviso = await message.channel.send(`${message.author}, links não são permitidos.`);
+        const aviso = await message.channel.send(`${message.author}, links não são permitidos.`).catch(() => {});
         setTimeout(() => aviso.delete().catch(() => {}), 5000);
       }
     }
@@ -138,7 +138,7 @@ client.on("messageCreate", async (message) => {
       if (prev.count > 4 && !perms.has(PermissionsBitField.Flags.ManageMessages)) {
         await message.delete().catch(() => {});
         if (!spamWarnCooldown.has(message.author.id)) {
-          const aviso = await message.channel.send(`${message.author}, pare de fazer spam.`);
+          const aviso = await message.channel.send(`${message.author}, pare de fazer spam.`).catch(() => {});
           spamWarnCooldown.add(message.author.id);
           setTimeout(() => spamWarnCooldown.delete(message.author.id), 10000);
           setTimeout(() => aviso.delete().catch(() => {}), 5000);
@@ -173,7 +173,9 @@ client.on("messageReactionAdd", async (reaction, user) => {
   if (!rr) return;
 
   const guild = reaction.message.guild;
-  const member = await guild.members.fetch(user.id);
+  const member = await guild.members.fetch(user.id).catch(() => null);
+  if (!member) return;
+
   const role = guild.roles.cache.get(rr.roleId);
   if (role) {
     await member.roles.add(role).catch(console.error);
@@ -203,7 +205,9 @@ client.on("messageReactionRemove", async (reaction, user) => {
   if (!rr) return;
 
   const guild = reaction.message.guild;
-  const member = await guild.members.fetch(user.id);
+  const member = await guild.members.fetch(user.id).catch(() => null);
+  if (!member) return;
+
   const role = guild.roles.cache.get(rr.roleId);
   if (role) {
     await member.roles.remove(role).catch(console.error);
@@ -220,11 +224,15 @@ client.on("interactionCreate", async (interaction) => {
     }
   } catch (error) {
     console.error("Erro na interação:", error);
-    if (!interaction.replied && !interaction.deferred) {
-      await interaction.reply({
-        content: "❌ Erro ao executar o comando.",
-        ephemeral: true,
-      });
+    try {
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({
+          content: "❌ Erro ao executar o comando.",
+          ephemeral: true,
+        });
+      }
+    } catch (err) {
+      console.error("Erro ao tentar responder erro da interação:", err);
     }
   }
 });
