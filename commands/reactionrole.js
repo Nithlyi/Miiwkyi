@@ -19,30 +19,29 @@ function isValidEmoji(emoji) {
   return regexUnicode.test(emoji) || regexCustom.test(emoji);
 }
 
+function parseEmojiIdentifier(emoji) {
+  const customMatch = emoji.match(/^<a?:\w+:(\d+)>$/);
+  return customMatch ? customMatch[1] : emoji; // Se custom, retorna ID; se unicode, retorna como está
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reactionrole")
     .setDescription("Cria ou configura uma mensagem de reaction role.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
-    .addRoleOption(opt =>
-      opt
-        .setName("cargo")
-        .setDescription("Cargo a ser atribuído")
-        .setRequired(true)
+    .addRoleOption((opt) =>
+      opt.setName("cargo").setDescription("Cargo a ser atribuído").setRequired(true)
     )
-    .addStringOption(opt =>
-      opt
-        .setName("emoji")
-        .setDescription("Emoji para o cargo")
-        .setRequired(true)
+    .addStringOption((opt) =>
+      opt.setName("emoji").setDescription("Emoji para o cargo").setRequired(true)
     )
-    .addStringOption(opt =>
+    .addStringOption((opt) =>
       opt
         .setName("mensagem")
         .setDescription("Texto da mensagem (deixe vazio se usar mensagem existente)")
         .setRequired(false)
     )
-    .addStringOption(opt =>
+    .addStringOption((opt) =>
       opt
         .setName("message_id")
         .setDescription("ID da mensagem existente para configurar")
@@ -53,9 +52,9 @@ module.exports = {
     const msg = interaction.options.getString("mensagem");
     const messageId = interaction.options.getString("message_id");
     const role = interaction.options.getRole("cargo");
-    const emoji = interaction.options.getString("emoji");
+    const emojiInput = interaction.options.getString("emoji");
 
-    if (!isValidEmoji(emoji)) {
+    if (!isValidEmoji(emojiInput)) {
       return interaction.reply({
         content: "❌ Emoji inválido. Use um emoji padrão ou custom do servidor.",
         ephemeral: true,
@@ -84,8 +83,9 @@ module.exports = {
         targetMessage = await interaction.channel.send({ content: msg });
       }
 
+      // Reagir com o emoji
       try {
-        await targetMessage.react(emoji);
+        await targetMessage.react(emojiInput);
       } catch (err) {
         console.error(err);
         return interaction.editReply({
@@ -94,9 +94,12 @@ module.exports = {
         });
       }
 
+      // Salvar no JSON usando o identificador correto
+      const emojiId = parseEmojiIdentifier(emojiInput);
+
       reactionRoles.push({
         messageId: targetMessage.id,
-        emoji: emoji,
+        emoji: emojiId,
         roleId: role.id,
       });
       saveReactionRoles();
