@@ -25,14 +25,14 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessageReactions, // necessário para reaction role
+    GatewayIntentBits.GuildMessageReactions,
   ],
 });
 
 client.commands = new Collection();
 const commands = [];
 
-// Carregar comandos da pasta /commands
+// Carrega comandos da pasta commands
 fs.readdirSync(path.join(__dirname, "commands"))
   .filter((file) => file.endsWith(".js"))
   .forEach((file) => {
@@ -43,7 +43,6 @@ fs.readdirSync(path.join(__dirname, "commands"))
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-// Registrar comandos no Discord Guild
 (async () => {
   try {
     console.log("📦 Registrando comandos...");
@@ -56,41 +55,47 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
   }
 })();
 
-// Função para salvar configurações
+// -------- CONFIG --------
+// Carrega o config só uma vez na memória
+let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
+
 function updateConfig(newConfig) {
+  config = newConfig;
   fs.writeFileSync("./config.json", JSON.stringify(newConfig, null, 2));
 }
+
+// -------------------------
 
 client.once("ready", () => {
   console.log(`✅ Bot iniciado como ${client.user.tag}`);
 });
 
-// Mapas e Sets para controle de anti-spam
+// Proteções
 const userMessageCache = new Map();
 const spamWarnCooldown = new Set();
 
-// Evento anti-raid (kick contas novas)
 client.on("guildMemberAdd", async (member) => {
-  const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
   if (!config.antiRaid || config.manutencao) return;
 
   const minAgeDays = config.minAccountAgeDays || 5;
-  const accountAge = (Date.now() - member.user.createdAt) / (1000 * 60 * 60 * 24);
+  const accountAge =
+    (Date.now() - member.user.createdAt) / (1000 * 60 * 60 * 24);
 
   if (accountAge < minAgeDays) {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
-    await member.kick(`Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`);
+    await member.kick(
+      `Conta muito nova (${accountAge.toFixed(1)} dias) - anti-raid.`,
+    );
     if (logChannel) {
-      logChannel.send(`🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`);
+      logChannel.send(
+        `🚨 ${member.user.tag} foi kickado (idade: ${accountAge.toFixed(1)} dias).`,
+      );
     }
   }
 });
 
-// Evento de mensagem para anti-invite, anti-link, anti-spam
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
-
-  const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
   if (config.manutencao) return;
 
   try {
@@ -148,10 +153,7 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-// Comandos e interações (slash commands, select menus, modais, botões)
 client.on("interactionCreate", async (interaction) => {
-  const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-
   if (interaction.isChatInputCommand()) {
     const command = client.commands.get(interaction.commandName);
     if (!command) return;
@@ -278,12 +280,14 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.customId === "modal_criarembed") {
       const titulo = interaction.fields.getTextInputValue("embed_titulo");
       const descricao = interaction.fields.getTextInputValue("embed_descricao");
-      const cor = interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
+      let cor = interaction.fields.getTextInputValue("embed_cor") || "#0099ff";
+
+      if (!cor.startsWith("#")) cor = "#" + cor;
 
       const embedPreview = new EmbedBuilder()
         .setTitle(titulo)
         .setDescription(descricao)
-        .setColor(parseInt(cor.replace("#", ""), 16) || 0x0099ff)
+        .setColor(cor)
         .setFooter({ text: "Confirme ou cancele" });
 
       const row = new ActionRowBuilder().addComponents(
@@ -328,67 +332,6 @@ client.on("interactionCreate", async (interaction) => {
         embeds: [],
       });
     }
-  }
-});
-
-// ====== Reaction Role =======
-const reactionRolesFile = "./reactionroles.json";
-
-// Quando adiciona reaction, adiciona cargo
-client.on("messageReactionAdd", async (reaction, user) => {
-  if (user.bot) return;
-  if (reaction.partial) await reaction.fetch();
-  if (!reaction.message.guild) return;
-
-  if (!fs.existsSync(reactionRolesFile)) return;
-  const data = JSON.parse(fs.readFileSync(reactionRolesFile, "utf8"));
-
-  const rr = data.find(
-    (r) =>
-      r.guildId === reaction.message.guild.id &&
-      r.channelId === reaction.message.channel.id &&
-      r.messageId === reaction.message.id &&
-      (r.emoji === reaction.emoji.name || r.emoji === reaction.emoji.toString()),
-  );
-
-  if (!rr) return;
-
-  const member = await reaction.message.guild.members.fetch(user.id);
-  if (!member) return;
-
-  try {
-    await member.roles.add(rr.roleId);
-  } catch (error) {
-    console.error("Erro ao adicionar cargo:", error);
-  }
-});
-
-// Quando remove reaction, remove cargo
-client.on("messageReactionRemove", async (reaction, user) => {
-  if (user.bot) return;
-  if (reaction.partial) await reaction.fetch();
-  if (!reaction.message.guild) return;
-
-  if (!fs.existsSync(reactionRolesFile)) return;
-  const data = JSON.parse(fs.readFileSync(reactionRolesFile, "utf8"));
-
-  const rr = data.find(
-    (r) =>
-      r.guildId === reaction.message.guild.id &&
-      r.channelId === reaction.message.channel.id &&
-      r.messageId === reaction.message.id &&
-      (r.emoji === reaction.emoji.name || r.emoji === reaction.emoji.toString()),
-  );
-
-  if (!rr) return;
-
-  const member = await reaction.message.guild.members.fetch(user.id);
-  if (!member) return;
-
-  try {
-    await member.roles.remove(rr.roleId);
-  } catch (error) {
-    console.error("Erro ao remover cargo:", error);
   }
 });
 
