@@ -14,14 +14,12 @@ function saveReactionRoles() {
 loadReactionRoles();
 
 function isValidEmoji(emoji) {
+  // Regex simples para emojis Unicode (emoji padrão)
   const regexUnicode = /\p{Extended_Pictographic}/u;
+  // Regex para emoji custom do Discord <a:name:id> ou <:name:id>
   const regexCustom = /^<a?:\w+:\d+>$/;
-  return regexUnicode.test(emoji) || regexCustom.test(emoji);
-}
 
-function parseEmojiIdentifier(emoji) {
-  const customMatch = emoji.match(/^<a?:\w+:(\d+)>$/);
-  return customMatch ? customMatch[1] : emoji; // Se custom, retorna ID; se unicode, retorna como está
+  return regexUnicode.test(emoji) || regexCustom.test(emoji);
 }
 
 module.exports = {
@@ -29,41 +27,50 @@ module.exports = {
     .setName("reactionrole")
     .setDescription("Cria ou configura uma mensagem de reaction role.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
-    .addRoleOption((opt) =>
-      opt.setName("cargo").setDescription("Cargo a ser atribuído").setRequired(true)
-    )
-    .addStringOption((opt) =>
-      opt.setName("emoji").setDescription("Emoji para o cargo").setRequired(true)
-    )
     .addStringOption((opt) =>
       opt
         .setName("mensagem")
         .setDescription("Texto da mensagem (deixe vazio se usar mensagem existente)")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addStringOption((opt) =>
       opt
         .setName("message_id")
         .setDescription("ID da mensagem existente para configurar")
-        .setRequired(false)
+        .setRequired(false),
+    )
+    .addRoleOption((opt) =>
+      opt
+        .setName("cargo")
+        .setDescription("Cargo a ser atribuído")
+        .setRequired(true),
+    )
+    .addStringOption((opt) =>
+      opt
+        .setName("emoji")
+        .setDescription("Emoji para o cargo")
+        .setRequired(true),
     ),
 
   async execute(interaction) {
     const msg = interaction.options.getString("mensagem");
     const messageId = interaction.options.getString("message_id");
     const role = interaction.options.getRole("cargo");
-    const emojiInput = interaction.options.getString("emoji");
+    const emoji = interaction.options.getString("emoji");
 
-    if (!isValidEmoji(emojiInput)) {
+    // Validar emoji
+    if (!isValidEmoji(emoji)) {
       return interaction.reply({
         content: "❌ Emoji inválido. Use um emoji padrão ou custom do servidor.",
         ephemeral: true,
       });
     }
 
+    // Validar que mensagem ou messageId foi passado
     if (!msg && !messageId) {
       return interaction.reply({
-        content: "❌ Você precisa fornecer uma mensagem ou o ID de uma mensagem existente.",
+        content:
+          "❌ Você precisa fornecer uma mensagem para enviar ou o ID de uma mensagem existente para configurar.",
         ephemeral: true,
       });
     }
@@ -73,6 +80,7 @@ module.exports = {
     let targetMessage;
     try {
       if (messageId) {
+        // Buscar mensagem existente no canal atual
         targetMessage = await interaction.channel.messages.fetch(messageId);
         if (!targetMessage) {
           return interaction.editReply({
@@ -80,36 +88,35 @@ module.exports = {
           });
         }
       } else {
+        // Criar mensagem nova
         targetMessage = await interaction.channel.send({ content: msg });
       }
 
-      // Reagir com o emoji
+      // Tentar reagir com o emoji
       try {
-        await targetMessage.react(emojiInput);
+        await targetMessage.react(emoji);
       } catch (err) {
-        console.error(err);
+        console.error("Erro ao reagir:", err);
         return interaction.editReply({
           content:
-            "❌ Falha ao adicionar o emoji. Verifique se o emoji é válido e se o bot tem acesso a ele.",
+            "❌ Falha ao adicionar o emoji. Verifique se o emoji é válido e se o bot tem permissão para usá-lo.",
         });
       }
 
-      // Salvar no JSON usando o identificador correto
-      const emojiId = parseEmojiIdentifier(emojiInput);
-
+      // Adicionar no array e salvar json
       reactionRoles.push({
         messageId: targetMessage.id,
-        emoji: emojiId,
+        emoji: emoji,
         roleId: role.id,
       });
       saveReactionRoles();
 
-      await interaction.editReply({
+      return interaction.editReply({
         content: `✅ Reaction Role configurado com sucesso na mensagem ${targetMessage.id}.`,
       });
     } catch (error) {
-      console.error(error);
-      await interaction.editReply({
+      console.error("Erro ao configurar reaction role:", error);
+      return interaction.editReply({
         content: "❌ Erro ao enviar/configurar a mensagem de reaction role.",
       });
     }
